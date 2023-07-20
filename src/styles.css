@@ -107,3 +107,11 @@ button {
     background-color: #0f0f0f69;
   }
 }
+
+.center_the_element {
+
+  text-align: center;
+  align-items: center;
+  align-self: center;
+  
+}
