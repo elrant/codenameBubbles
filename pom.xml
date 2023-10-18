@@ -4,8 +4,8 @@
     <modelVersion>4.0.0</modelVersion>
     <!-- Project from https://start.vaadin.com/project/470308cc-4aa3-4f4f-bbd9-8d7ab41586e2 -->
     <groupId>team.elrant.bubbles</groupId>
-    <artifactId>my-app</artifactId>
-    <name>my-app</name>
+    <artifactId>Bubbles</artifactId>
+    <name>Bubbles</name>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 

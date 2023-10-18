@@ -20,7 +20,7 @@ This will build a JAR file with all the dependencies and front-end resources,
 ready to be deployed. The file can be found in the `target` folder after the build completes.
 
 Once the JAR file is built, you can run it using
-`java -jar target/my-app-1.0-SNAPSHOT.jar`
+`java -jar target/Bubbles-1.0-SNAPSHOT.jar`
 
 ## Project structure
 
