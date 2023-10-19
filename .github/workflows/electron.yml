@@ -36,9 +36,32 @@ jobs:
         name: dist
         path: out
 
-    - name: Publish Release
-      id: publish
-      uses: softprops/action-gh-release@v1
+    - name: Get Package Version
+      id: get_version
+      run: echo "::set-output name=package_version::$(node -e 'console.log(require("./package.json").version)')"
+
+    - name: Create Draft Release
+      id: create_draft
+      run: |
+        echo "Creating a draft release"
+        curl -X POST -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+          -d '{
+            "tag_name": "${{ steps.get_version.outputs.package_version }}",
+            "target_commitish": "main",
+            "name": "Release ${{ steps.get_version.outputs.package_version }}",
+            "body": "This is a draft release.",
+            "draft": true
+          }' \
+          "https://api.github.com/repos/${{ github.repository }}/releases"
+      continue-on-error: true
+
+    - name: Get Release ID
+      id: get_release_id
+      run: echo "::set-output name=release_id::$(jq -r '.id' $GITHUB_EVENT_PATH)"
+
+    - name: Upload Release Assets
+      uses: actions/upload-release-assets@v1
       with:
-        files: out/**/*
-        token: ${{ secrets.GITHUB_TOKEN }}
+        upload_url: https://uploads.github.com/repos/${{ github.repository }}/releases/${{ steps.get_release_id.outputs.release_id }}/assets
+        asset_path: out/**/*
+        asset_name: ${{ runner.os }}-artifact.zip
