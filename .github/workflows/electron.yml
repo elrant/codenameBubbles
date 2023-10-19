@@ -52,4 +52,4 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: bubbifacts
-        path: ${{ steps.create-artifacts.outputs.artifacts }}
+        path: out/
