@@ -5,7 +5,10 @@ on: push
 jobs:
   release:
     runs-on: ${{ matrix.os }}
-
+    defaults:
+      run:
+        working-directory: electron
+        
     strategy:
       matrix:
         os: [macos-latest, ubuntu-latest, windows-latest]
