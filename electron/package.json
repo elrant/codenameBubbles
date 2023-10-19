@@ -1,15 +1,32 @@
 {
-  "name": "electron",
+  "name": "bubbles",
   "version": "1.0.0",
-  "description": "",
+  "description": "bringing people closer without vr headsets",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/elrant/codenameBubbles.git"
+  },
   "main": "main.js",
   "scripts": {
-    "start": "electron .",
-    "package": "electron-packager . electron"
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "publish": "electron-forge publish"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Team Elrant",
+  "license": "CC BY-NC-SA 4.0",
   "devDependencies": {
+    "@electron-forge/cli": "^6.4.2",
+    "@electron-forge/maker-deb": "^6.4.2",
+    "@electron-forge/maker-rpm": "^6.4.2",
+    "@electron-forge/maker-squirrel": "^6.4.2",
+    "@electron-forge/maker-zip": "^6.4.2",
+    "@electron-forge/plugin-auto-unpack-natives": "^6.4.2",
+    "@electron-forge/publisher-github": "^6.4.2",
     "electron": "^27.0.1"
+  },
+  "dependencies": {
+    "electron-squirrel-startup": "^1.0.0",
+    "update-electron-app": "^2.0.1"
   }
 }

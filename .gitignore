@@ -4,6 +4,9 @@
 .settings
 .project
 .classpath
+electron/.env
+electron/node_modules/
+electron/out
 
 *.iml
 .DS_Store
