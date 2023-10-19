@@ -31,25 +31,8 @@ jobs:
     - name: Build Electron app
       run: npx electron-forge make
       
-    - name: Debug file list
-      run: ls -R out
-
-    - name: List Subdirectories
-      run: |
-        find out -mindepth 1 -maxdepth 1 -type d > subdirs.txt
-      shell: bash
-
-    - name: Create and Upload Artifacts
-      id: create-artifacts
-      run: |
-        while IFS= read -r dir; do
-          zip -r "$dir.zip" "$dir"
-          echo "::set-output name=artifacts::$dir.zip"
-        done < subdirs.txt
-      shell: bash
-
     - name: Upload Artifacts
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: bubbifacts
-        path: out/
+        path: out/*
