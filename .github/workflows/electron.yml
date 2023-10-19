@@ -23,46 +23,16 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: 20
-
+        cache: 'npm'
+    
     - name: Install dependencies
       run: npm install
 
     - name: Build Electron app
       run: npx electron-forge make
-      
-    - name: List files in directory
-      run: |
-        for dir in out/*; do
-          if [ -d "$dir" ]; then
-            artifact_name=$(basename "$dir")
-            echo "Creating artifact: $artifact_name"
-            find "$dir" -type f -exec echo "::set-output name=artifact::$artifact_name" \;
-          fi
-        done
-      id: list-files
-
-    - name: Create Artifacts
-      run: |
-        artifacts=($(echo "${{ steps.list-files.outputs.artifact }}" | tr ' ' '\n'))
-        for artifact in "${artifacts[@]}"; do
-          echo "Creating artifact: $artifact"
-          find "out/$artifact" -type f -exec echo "::set-output name=artifact::$artifact" \;
-        done
-      id: create-artifacts
-
-    - name: Upload Artifacts
-      run: |
-        artifacts=($(echo "${{ steps.create-artifacts.outputs.artifact }}" | tr ' ' '\n'))
-        for artifact in "${artifacts[@]}"; do
-          echo "Uploading artifact: $artifact"
-          echo "out/$artifact/*"
-          echo "::set-output name=artifact::$artifact"
-        done
-      id: upload-artifacts
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v2
       with:
-        name: ${{ steps.upload-artifacts.outputs.artifact }}
-        path: out/${{ steps.upload-artifacts.outputs.artifact }}/*
+        path: out/*
 
