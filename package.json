@@ -85,6 +85,7 @@
     "@rollup/pluginutils": "5.0.2",
     "@vitejs/plugin-react": "4.0.4",
     "async": "3.2.4",
+    "electron": "^27.0.1",
     "glob": "10.3.3",
     "rollup-plugin-brotli": "3.1.0",
     "rollup-plugin-visualizer": "5.9.2",
@@ -193,7 +194,7 @@
       "workbox-core": "7.0.0",
       "workbox-precaching": "7.0.0"
     },
-    "hash": "3528802ccc0a0cc916ed0fe8fafed5b853e5f84c599e9fa068106d9f91aec8d5"
+    "hash": "838dd7cde8e1edaf1cb09e4e5d6cc0659642b894bfaa12c20b6c8367d05d2f34"
   },
   "overrides": {
     "@vaadin/bundles": "$@vaadin/bundles",
@@ -271,6 +272,7 @@
     "proj4": "$proj4",
     "@vaadin/vaadin-themable-mixin": "$@vaadin/vaadin-themable-mixin",
     "date-fns": "$date-fns",
-    "mobile-drag-drop": "$mobile-drag-drop"
+    "mobile-drag-drop": "$mobile-drag-drop",
+    "electron": "$electron"
   }
 }

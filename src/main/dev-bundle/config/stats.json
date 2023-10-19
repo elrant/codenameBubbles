@@ -73,6 +73,7 @@
   "@vaadin/virtual-list": "24.2.0",
   "construct-style-sheets-polyfill": "3.1.0",
   "date-fns": "2.29.3",
+  "electron": "^27.0.1",
   "lit": "2.8.0",
   "mobile-drag-drop": "2.3.0-rc.2",
   "proj4": "2.9.1"
@@ -327,7 +328,7 @@
    "version": "24.2.0"
   }
  },
- "packageJsonHash": "3528802ccc0a0cc916ed0fe8fafed5b853e5f84c599e9fa068106d9f91aec8d5",
+ "packageJsonHash": "09f4b88716a64e6993362b79dd0e8c4d9fb4f08de2a0ab9a94f42c78df76924a",
  "indexHtmlGenerated": [
   "  <script type=\"module\" crossorigin src=\"./VAADIN/build/indexhtml-251932fc.js\"></script>"
  ]
