@@ -29,9 +29,21 @@ jobs:
 
     - name: Build Electron app
       run: npx electron-forge make
+      
+    - name: Create and upload artifacts
+      run: |
+        for dir in out/*; do
+          if [ -d "$dir" ]; then
+            echo "Creating artifact for $dir"
+            echo "::set-output name=artifact_path::$dir" >> $GITHUB_ENV
+            echo "::set-output name=artifact_name::$(basename $dir)" >> $GITHUB_ENV
+          fi
+        done
+      id: set-output
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v2
       with:
-        name: dist
-        path: out
+        name: ${{ steps.set-output.outputs.artifact_name }}
+        path: ${{ steps.set-output.outputs.artifact_path }}
+
