@@ -31,11 +31,11 @@ jobs:
     - name: Build Electron app
       run: npx electron-forge make
       
-    - name: Debug File Listing
-      run: ls -R
+    - name: Debug file list
+      run: ls -R out
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v2
       with:
-        path: out
+        path: out/make
 
