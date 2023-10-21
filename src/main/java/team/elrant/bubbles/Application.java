@@ -2,9 +2,9 @@ package team.elrant.bubbles;
 
 import com.vaadin.flow.component.page.AppShellConfigurator;
 import com.vaadin.flow.theme.Theme;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ConfigurableApplicationContext;
 
 
 /**
@@ -16,9 +16,9 @@ import org.springframework.context.ConfigurableApplicationContext;
 @SpringBootApplication
 @Theme(value = "Bubbles")
 public class Application implements AppShellConfigurator {
+
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
-        ConfigurableApplicationContext context = SpringApplication.run(Application.class, args);
     }
 
 }
