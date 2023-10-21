@@ -27,6 +27,8 @@
     "electron-builder": "^24.6.4"
   },
   "dependencies": {
+    "7.css": "^0.15.0",
+    "custom-electron-titlebar": "^4.2.7",
     "electron-squirrel-startup": "^1.0.0",
     "update-electron-app": "^2.0.1"
   }

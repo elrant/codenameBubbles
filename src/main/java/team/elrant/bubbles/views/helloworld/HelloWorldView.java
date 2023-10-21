@@ -20,7 +20,11 @@ public class HelloWorldView extends HorizontalLayout {
 
     public HelloWorldView() {
         name = new TextField("Your name");
+        //<theme-editor-local-classname>
+        name.addClassName("hello-world-view-text-field-1");
         sayHello = new Button("Say hello");
+        //<theme-editor-local-classname>
+        sayHello.addClassName("hello-world-view-button-1");
         sayHello.addClickListener(e -> {
             Notification.show("Hello " + name.getValue());
         });

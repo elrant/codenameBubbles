@@ -1,0 +1,13 @@
+/*
+ * This file has been created by the Vaadin Theme Editor. Please note that
+ * manual changes to individual CSS properties may be overwritten by the theme editor.
+ */
+vaadin-button.hello-world-view-button-1 {
+  --lumo-button-size:var(--lumo-size-m);
+  border-width:0;
+}
+
+vaadin-text-field.hello-world-view-text-field-1::part(input-field) {
+  border-radius:var(--lumo-border-radius-l);
+  border-width:0;
+}
