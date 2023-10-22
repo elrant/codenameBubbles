@@ -4,7 +4,6 @@ import org.jivesoftware.smack.AbstractXMPPConnection;
 import org.jivesoftware.smack.SmackException.NotConnectedException;
 import org.jivesoftware.smack.packet.Message;
 import org.jxmpp.stringprep.XmppStringprepException;
-import org.springframework.boot.actuate.autoconfigure.metrics.MetricsProperties.System;
 
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.button.Button;
@@ -33,10 +32,10 @@ public class ChatView extends VerticalLayout {
     private CookieManager cookieMonster = new CookieManager();
 
     public ChatView() {
-
-        user = cookieMonster.getProfileFromCookie();
+        VaadinSession currentSession = VaadinSession.getCurrent();
+        user = cookieMonster.getProfileFromCookie(currentSession);
         
-        AbstractXMPPConnection connection = user.getConnection();
+        AbstractXMPPConnection connection = user.connection;
         chatMessages = new Div();
         chatMessages.addClassName("chat-messages");
 

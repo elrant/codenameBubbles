@@ -6,11 +6,18 @@ import org.jivesoftware.smack.packet.Stanza;
 import org.jivesoftware.smack.tcp.XMPPTCPConnection;
 
 
+/**
+ * Initializes a new Profile with the provided credentials.
+ *
+ * @param username    The username for the XMPP connection.
+ * @param password    The password for the XMPP connection.
+ * @param serviceName The service name for the XMPP connection.
+ */
 public class Profile {
     private String username;
     private String password;
     private String serviceName;
-    private AbstractXMPPConnection connection;
+    public AbstractXMPPConnection connection;
 
     public Profile(String username, String password, String serviceName) {
         this.username = username;
@@ -24,10 +31,13 @@ public class Profile {
 
         connect();
         System.out.println("Profile: " + this);
-
+        System.out.println("Connection: " + connection);
 
     }
 
+    /**
+     * Establishes a connection to the XMPP server using the provided credentials.
+     */
     public void connect() {
         try {
             AbstractXMPPConnection connection = new XMPPTCPConnection(username, password, serviceName);
@@ -37,6 +47,11 @@ public class Profile {
         }
     }
 
+    /**
+     * Sends a message to the XMPP server.
+     *
+     * @param message The message to be sent.
+     */
     public void sendMessage(Stanza message) {
         try {
             connection.sendStanza(message);
@@ -46,7 +61,4 @@ public class Profile {
 
     }
  
-    public AbstractXMPPConnection getConnection() {
-        return connection;
-    }
 }
