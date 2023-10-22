@@ -3,7 +3,7 @@ require('update-electron-app')()
 const { setupTitlebar, attachTitlebarToWindow } = require("custom-electron-titlebar/main");
 
 const path = require('path');
-let mainWindow;
+let mainWindow = null;
 setupTitlebar();
 
 /**
