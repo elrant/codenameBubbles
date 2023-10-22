@@ -30,8 +30,7 @@ public class CookieManager {
         LOGGER.info("Cookie saved");
     }
 
-    public Profile getProfileFromCookie(){
-        VaadinSession currentSession = VaadinSession.getCurrent();
+    public Profile getProfileFromCookie(VaadinSession currentSession){
         Profile user = (Profile) currentSession.getAttribute("user");
         // log
         LOGGER.info("User retrieved from cookie: " + user);

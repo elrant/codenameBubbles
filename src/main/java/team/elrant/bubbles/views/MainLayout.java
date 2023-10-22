@@ -13,7 +13,6 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.theme.lumo.LumoUtility;
 import org.vaadin.lineawesome.LineAwesomeIcon;
 
-import team.elrant.bubbles.XMPP.Profile;
 import team.elrant.bubbles.views.about.AboutView;
 
 

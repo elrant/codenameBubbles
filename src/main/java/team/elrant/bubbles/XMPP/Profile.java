@@ -10,7 +10,7 @@ public class Profile {
     private String username;
     private String password;
     private String serviceName;
-    private AbstractXMPPConnection connection;
+    public AbstractXMPPConnection connection;
 
     public Profile(String username, String password, String serviceName) {
         this.username = username;
@@ -24,7 +24,7 @@ public class Profile {
 
         connect();
         System.out.println("Profile: " + this);
-
+        System.out.println("Connection: " + connection);
 
     }
 
@@ -46,7 +46,4 @@ public class Profile {
 
     }
  
-    public AbstractXMPPConnection getConnection() {
-        return connection;
-    }
 }
