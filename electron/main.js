@@ -3,14 +3,14 @@ require('update-electron-app')()
 const { setupTitlebar, attachTitlebarToWindow } = require("custom-electron-titlebar/main");
 
 const path = require('path');
-
+let mainWindow;
 setupTitlebar();
 
 /**
  * Create the main window
  */
 function createWindow() {
-    let mainWindow = new BrowserWindow({
+        mainWindow = new BrowserWindow({
         width: 940,
         height: 800,
         frame: true, // needed if process.versions.electron < 14
