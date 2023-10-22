@@ -41,7 +41,7 @@ public class LoginView extends VerticalLayout {
             String password = passwordField.getValue();
 
             try {
-                Profile user = new Profile(username, password, "localhost");
+                Profile user = new Profile(username, password, "localhost.local");
                 user.connect();
 
                 // If the connection is successful, navigate to the "chat" view
