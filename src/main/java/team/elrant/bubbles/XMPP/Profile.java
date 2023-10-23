@@ -2,9 +2,12 @@ package team.elrant.bubbles.XMPP;
 
 import org.jivesoftware.smack.AbstractXMPPConnection;
 import org.jivesoftware.smack.SmackException.NotConnectedException;
+import org.jivesoftware.smack.java7.Java7SmackInitializer;
 import org.jivesoftware.smack.packet.Stanza;
 import org.jivesoftware.smack.tcp.XMPPTCPConnection;
+import org.jivesoftware.smack.tcp.XMPPTCPConnectionConfiguration;
 import org.jivesoftware.smack.util.dns.minidns.MiniDnsResolver;
+import org.jxmpp.stringprep.XmppStringprepException;
 
 /**
  * Initializes a new Profile with the provided credentials.
@@ -12,11 +15,13 @@ import org.jivesoftware.smack.util.dns.minidns.MiniDnsResolver;
  * @param username    The username for the XMPP connection.
  * @param password    The password for the XMPP connection.
  * @param serviceName The service name for the XMPP connection.
+ * 
  */
 public class Profile {
     private String username;
     private String password;
     private String serviceName;
+    private XMPPTCPConnectionConfiguration connectionConfiguration;
     public AbstractXMPPConnection connection;
 
     /**
@@ -31,32 +36,61 @@ public class Profile {
      * @param serviceName The FQDN we're logging into.
      */
     public Profile(String username, String password, String serviceName) {
+        new Java7SmackInitializer().initialize();
         this.username = username;
         this.password = password;
         this.serviceName = serviceName;
+        this.connectionConfiguration = configure();
+
         System.out.println("Profile instantiated with the following information:");
-        System.out.println("Username: " + username);
-        System.out.println("Service name: " + serviceName);
-        System.out.println("Password: " + password);
+        System.out.println("Username: " + this.username);
+        System.out.println("Service name: " + this.serviceName);
+        System.out.println("Password: " + this.password);
 
         // setup minidns resolver
         MiniDnsResolver.setup();
 
-        connect();
+        boolean status = connect();
         System.out.println("Profile: " + this);
         System.out.println("Connection: " + connection);
+        System.out.println("isSecure: " + connection.isSecureConnection());
+        System.out.println("isConnected: " + status);
+
     }
 
     /**
      * Establishes a connection to the XMPP server using the provided credentials.
      */
-    public void connect() {
+    public boolean connect() {
+
         try {
-            AbstractXMPPConnection connection = new XMPPTCPConnection(username, password, serviceName);
+
+            AbstractXMPPConnection connection = new XMPPTCPConnection(connectionConfiguration);
             connection.connect().login();
+            this.connection = connection;
+            return connection.isConnected();
         } catch (Exception e) {
             System.out.println("Exception caught: " + e.getMessage());
+            return connection.isConnected();
         }
+    }
+
+    public XMPPTCPConnectionConfiguration configure() {
+        XMPPTCPConnectionConfiguration config;
+        try {
+            config = XMPPTCPConnectionConfiguration.builder()
+                    .setXmppDomain(serviceName)
+                    .setUsernameAndPassword(username, password)
+                    .setHostnameVerifier(
+                            (hostname, session) -> true)
+                    .setCompressionEnabled(false).build();
+            return config;
+        } catch (XmppStringprepException e) {
+            e.printStackTrace();
+            System.out.println("Failed to run Profile.configure()");
+            return null;
+        }
+
     }
 
     /**

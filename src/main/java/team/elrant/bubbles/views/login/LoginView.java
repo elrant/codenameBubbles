@@ -24,6 +24,7 @@ public class LoginView extends VerticalLayout {
 
     private CookieManager cookieMonster = new CookieManager();
     private TextField usernameField;
+    private TextField serviceNameField;
     private PasswordField passwordField;
     private Button loginButton;
     private Notification errorNotification;
@@ -33,15 +34,16 @@ public class LoginView extends VerticalLayout {
     public LoginView() {
         usernameField = new TextField("Username");
         passwordField = new PasswordField("Password");
+        serviceNameField = new TextField("Service Name");
         loginButton = new Button("Login");
         errorNotification = new Notification("Uh oh.", 3000);
 
         loginButton.addClickListener(e -> {
             String username = usernameField.getValue();
             String password = passwordField.getValue();
-
+            String serviceName = serviceNameField.getValue();
             try {
-                Profile user = new Profile(username, password, "localhost.local");
+                Profile user = new Profile(username, password, serviceName);
                 user.connect();
 
                 // If the connection is successful, navigate to the "chat" view
@@ -59,7 +61,7 @@ public class LoginView extends VerticalLayout {
         });
         loginButton.addClickShortcut(Key.ENTER);
 
-        add(usernameField, passwordField, loginButton, errorNotification);
+        add(usernameField, serviceNameField, passwordField, loginButton, errorNotification);
         setAlignItems(Alignment.CENTER);
     }
 
