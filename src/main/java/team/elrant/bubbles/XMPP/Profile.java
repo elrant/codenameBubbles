@@ -56,13 +56,14 @@ public class Profile {
         System.out.println("isSecure: " + connection.isSecureConnection());
         System.out.println("isConnected: " + status);
 
+        disconnect();
     }
 
     /**
      * Establishes a connection to the XMPP server using the provided credentials.
+     * @return True if the connection is successful, false otherwise.
      */
     public boolean connect() {
-
         try {
 
             AbstractXMPPConnection connection = new XMPPTCPConnection(connectionConfiguration);
@@ -75,6 +76,11 @@ public class Profile {
         }
     }
 
+    /**
+     * Configures the XMPP connection.
+     *
+     * @return The XMPP connection configuration.
+     */
     public XMPPTCPConnectionConfiguration configure() {
         XMPPTCPConnectionConfiguration config;
         try {
@@ -107,4 +113,19 @@ public class Profile {
 
     }
 
+    /**
+     * Disconnects the XMPP connection.
+     */
+    public void disconnect() {
+        connection.disconnect();
+    }
+
+    /**
+     * Returns the username associated with the profile.
+     *
+     * @return The username associated with the profile.
+     */
+    public String getUsername() {
+        return username;
+    }
 }

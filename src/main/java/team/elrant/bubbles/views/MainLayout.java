@@ -23,12 +23,18 @@ public class MainLayout extends AppLayout {
 
     private H2 viewTitle;
 
+    /**
+     * Constructs a new MainLayout.
+     */
     public MainLayout() {
         setPrimarySection(Section.DRAWER);
         addDrawerContent();
         addHeaderContent();
     }
 
+    /**
+     * Adds the header content to the layout.
+     */
     private void addHeaderContent() {
         DrawerToggle toggle = new DrawerToggle();
         toggle.setAriaLabel("Menu toggle");
@@ -39,6 +45,9 @@ public class MainLayout extends AppLayout {
         addToNavbar(true, toggle, viewTitle);
     }
 
+    /**
+     * Adds the drawer content to the layout.
+     */
     private void addDrawerContent() {
         H1 appName = new H1("codenameBubbles");
         appName.addClassNames(LumoUtility.FontSize.LARGE, LumoUtility.Margin.NONE);
@@ -49,6 +58,11 @@ public class MainLayout extends AppLayout {
         addToDrawer(header, scroller, createFooter());
     }
 
+    /**
+     * Creates the side navigation menu.
+     *
+     * @return The side navigation menu.
+     */
     private SideNav createNavigation() {
         SideNav nav = new SideNav();
 
@@ -57,6 +71,11 @@ public class MainLayout extends AppLayout {
         return nav;
     }
 
+    /**
+     * Creates the footer.
+     *
+     * @return The footer.
+     */
     private Footer createFooter() {
         Footer layout = new Footer();
 
@@ -69,8 +88,14 @@ public class MainLayout extends AppLayout {
         viewTitle.setText(getCurrentPageTitle());
     }
 
+    /**
+     * Gets the title of the current page.
+     *
+     * @return The title of the current page.
+     */
     private String getCurrentPageTitle() {
         PageTitle title = getContent().getClass().getAnnotation(PageTitle.class);
         return title == null ? "" : title.value();
     }
+
 }

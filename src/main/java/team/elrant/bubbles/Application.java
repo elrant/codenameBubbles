@@ -17,6 +17,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @Theme(value = "Bubbles")
 public class Application implements AppShellConfigurator {
 
+    /**
+     * The main method.
+     * @param args the arguments
+     */
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }

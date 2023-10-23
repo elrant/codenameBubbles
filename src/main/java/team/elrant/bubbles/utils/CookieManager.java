@@ -15,8 +15,6 @@ import team.elrant.bubbles.XMPP.Profile;
 public class CookieManager {
 
     private static final Logger LOGGER = Logger.getLogger(CookieManager.class.getName());
-
-        // Method to save a user-specific cookie
     
     /**
      * Saves a user-specific cookie.

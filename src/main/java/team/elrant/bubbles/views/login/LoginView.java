@@ -17,6 +17,11 @@ import team.elrant.bubbles.XMPP.Profile;
 import team.elrant.bubbles.views.MainLayout;
 import team.elrant.bubbles.utils.CookieManager;
 
+/**
+ * LoginView is the view that allows users to log in to the application.
+ * It is the first view that users see when they navigate to the application.
+ * It is also the view that users are redirected to if they are not logged in.
+ */
 @PageTitle("Login")
 @RouteAlias(value = "", layout = MainLayout.class)
 @Route(value = "login", layout = MainLayout.class)
@@ -29,8 +34,10 @@ public class LoginView extends VerticalLayout {
     private Button loginButton;
     private Notification errorNotification;
     public Profile user;
-    
 
+    /**
+     * Constructs a new LoginView.
+     */
     public LoginView() {
         usernameField = new TextField("Username");
         passwordField = new PasswordField("Password");
@@ -44,15 +51,17 @@ public class LoginView extends VerticalLayout {
             String serviceName = serviceNameField.getValue();
             try {
                 Profile user = new Profile(username, password, serviceName);
-                user.connect();
-
-                // If the connection is successful, navigate to the "chat" view
-                getUI().ifPresent(ui -> ui.navigate("chat"));
-
-                // Save a cookie after successful login
-                VaadinRequest currentRequest = VaadinService.getCurrentRequest();
-                VaadinSession currentSession = VaadinSession.getCurrent();
-                cookieMonster.saveUserCookie(user, currentRequest, currentSession);
+                boolean status = user.connect();
+                if (status) {
+                    // Save a cookie after successful login
+                    VaadinRequest currentRequest = VaadinService.getCurrentRequest();
+                    System.out.println("LoginView: currentRequest: " + currentRequest);
+                    VaadinSession currentSession = VaadinSession.getCurrent();
+                    System.out.println("LoginView: currentSession: " + currentSession);
+                    cookieMonster.saveUserCookie(user, currentRequest, currentSession);
+                    // If the connection is successful, navigate to the "chat" view
+                    getUI().ifPresent(ui -> ui.navigate("chat"));
+                }
 
             } catch (Exception exception) {
                 errorNotification.setText("Login failed. Please check your credentials.");
@@ -64,6 +73,5 @@ public class LoginView extends VerticalLayout {
         add(usernameField, serviceNameField, passwordField, loginButton, errorNotification);
         setAlignItems(Alignment.CENTER);
     }
-
 
 }

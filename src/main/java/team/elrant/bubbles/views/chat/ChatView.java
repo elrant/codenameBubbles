@@ -18,6 +18,10 @@ import team.elrant.bubbles.XMPP.Profile;
 import team.elrant.bubbles.utils.CookieManager;
 import team.elrant.bubbles.views.MainLayout;
 
+/**
+ * ChatView is the view that allows users to chat with their contacts.
+ * It is the view that users are redirected to after they log in.
+ */
 @Route(value = "chat", layout = MainLayout.class)
 @PageTitle("Chat")
 public class ChatView extends VerticalLayout {
@@ -31,11 +35,19 @@ public class ChatView extends VerticalLayout {
     private Profile user;
     private CookieManager cookieMonster = new CookieManager();
 
+    /**
+     * Constructs a new ChatView.
+     * This constructor initializes the ChatView object with the profile
+     * retrieved from session storage and establishes a connection.
+     */
     public ChatView() {
         VaadinSession currentSession = VaadinSession.getCurrent();
+        System.out.println("ChatView: currentSession: " + currentSession);
         user = cookieMonster.getProfileFromCookie(currentSession);
+        System.out.println("ChatView: user: " + user);
         
         AbstractXMPPConnection connection = user.connection;
+        System.out.println("ChatView: connection: " + connection);
         chatMessages = new Div();
         chatMessages.addClassName("chat-messages");
 
@@ -46,7 +58,7 @@ public class ChatView extends VerticalLayout {
         sendButton.addClickListener(e -> {
 
             try {
-                sendMessage(inputMessage.getValue());
+                sendMessage(inputMessage.getValue(), user.getUsername());
             } catch (NotConnectedException | XmppStringprepException | InterruptedException e1) {
                 e1.printStackTrace();
             }
@@ -57,7 +69,14 @@ public class ChatView extends VerticalLayout {
         this.connection = connection;
     }
 
-    private void sendMessage(String messageText)
+    /**
+     * Sends a message to the user's contact.
+     * @param messageText
+     * @throws NotConnectedException
+     * @throws InterruptedException
+     * @throws XmppStringprepException
+     */
+    private void sendMessage(String messageText, String recipient)
             throws NotConnectedException, InterruptedException, XmppStringprepException {
 
         // Display the sent message in the chat interface
@@ -67,8 +86,8 @@ public class ChatView extends VerticalLayout {
 
         Message message = connection.getStanzaFactory()
                 .buildMessageStanza()
-                .to("jsmith@igniterealtime.org")
-                .setBody("Howdy! How are you?")
+                .to(recipient)
+                .setBody(messageText)
                 .build();
 
         connection.sendStanza(message);
