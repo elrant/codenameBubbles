@@ -13,6 +13,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * and some desktop browsers.
  *
  */
+@com.vaadin.flow.server.PWA(name = "codenameBubbles", shortName = "Bubbles")
 @SpringBootApplication
 @Theme(value = "Bubbles")
 public class Application implements AppShellConfigurator {
