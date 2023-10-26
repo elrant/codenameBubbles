@@ -59,6 +59,7 @@ public class LoginView extends VerticalLayout {
                     VaadinSession currentSession = VaadinSession.getCurrent();
                     System.out.println("LoginView: currentSession: " + currentSession);
                     cookieMonster.saveUserCookie(user, currentRequest, currentSession);
+                    user.disconnect();
                     // If the connection is successful, navigate to the "chat" view
                     getUI().ifPresent(ui -> ui.navigate("chat"));
                 }
